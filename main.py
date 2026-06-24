@@ -1,9 +1,50 @@
-jmeno = "Marek"
-heslo = "1234"
-uzivatel = {"Marek": "1234"}
+uzivatele = {
+    "bob": "123",
+    "ann": "pass123",
+    "mike": "password123",
+    "liz": "pass123"
+    }
+cara = "-" * 40
 
-if "Marek" in uzivatel and uzivatel["Marek"] == "1234":
-    zprava = "Ahoj Marek, vítej v aplikaci! Pokračuj..."
+jmeno = input(str("username: "))
+if jmeno in uzivatele:
+    heslo = input(str("password: "))
+    if uzivatele[jmeno] == heslo:
+        print(cara)
+        print(f"Welcome to the app, {jmeno}.")
+    else:
+        print("Nesprávné heslo.")
+        quit()
 else:
-    zprava = "Uživatelské jméno nebo heslo nejsou v pořádku!"
-print(f"Výstup: {zprava}")
+    print("Uživatelské jméno neexistuje.")
+    quit()
+
+texts = [ '''Situated about 10 miles west of Kemmerer,
+    Fossil Butte is a ruggedly impressive
+    topographic feature that rises sharply
+    some 1000 feet above Twin Creek Valley
+    to an elevation of more than 7500 feet
+    above sea level. The butte is located just
+    north of US 30 and the Union Pacific Railroad,
+    which traverse the valley.''',
+    '''At the base of Fossil Butte are the bright
+    red, purple, yellow and gray beds of the Wasatch
+    Formation. Eroded portions of these horizontal
+    beds slope gradually upward from the valley floor
+    and steepen abruptly. Overlying them and extending
+    to the top of the butte are the much steeper
+    buff-to-white beds of the Green River Formation,
+    which are about 300 feet thick.''',
+    '''The monument contains 8198 acres and protects
+    a portion of the largest deposit of freshwater fish
+    fossils in the world. The richest fossil fish deposits
+    are found in multiple limestone layers, which lie some
+    100 feet below the top of the butte. The fossils
+    represent several varieties of perch, as well as
+    other freshwater genera and herring similar to those
+    in modern oceans. Other fish such as paddlefish,
+    garpike and stingray are also present.''']
+
+pocet_textu = len(texts)
+print(f"We have {pocet_textu} texts to be analyzed.")
+print(cara)
