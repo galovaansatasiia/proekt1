@@ -6,20 +6,8 @@ uzivatele = {
     }
 cara = "-" * 40
 
-jmeno = input(str("username: "))
-if jmeno in uzivatele:
-    heslo = input(str("password: "))
-    if uzivatele[jmeno] == heslo:
-        print(cara)
-        print(f"Welcome to the app, {jmeno}.")
-    else:
-        print("Nesprávné heslo.")
-        quit()
-else:
-    print("Uživatelské jméno neexistuje.")
-    quit()
-
-texts = [ '''Situated about 10 miles west of Kemmerer,
+texts = [
+    '''Situated about 10 miles west of Kemmerer,
     Fossil Butte is a ruggedly impressive
     topographic feature that rises sharply
     some 1000 feet above Twin Creek Valley
@@ -43,8 +31,66 @@ texts = [ '''Situated about 10 miles west of Kemmerer,
     represent several varieties of perch, as well as
     other freshwater genera and herring similar to those
     in modern oceans. Other fish such as paddlefish,
-    garpike and stingray are also present.''']
-
+    garpike and stingray are also present.'''
+]
 pocet_textu = len(texts)
-print(f"We have {pocet_textu} texts to be analyzed.")
-print(cara)
+
+jmeno = input(str("username: "))
+heslo = input(str("password: "))
+
+if jmeno in uzivatele and uzivatele[jmeno] == heslo:
+    print(cara)
+    print(f"Welcome to the app, {jmeno}.")
+    print(f"We have {pocet_textu} texts to be analyzed.")
+    print(cara)
+
+    cislo_textu = input(f"Enter a number btw. 1 and {pocet_textu} to select: ")
+    print(cara)
+
+    if not cislo_textu.isdigit():
+        print("Invalid choice, terminating the program.")
+        quit()
+    elif int(cislo_textu) < 1 or int(cislo_textu) > int(pocet_textu):
+        print("Invalid choice, terminating the program.")
+        quit()
+    else:
+        vybrany_text = texts[int(cislo_textu) - 1]
+        vsechna_slova = vybrany_text.split()
+        print(f"There are {len(vsechna_slova)} words in the selected text.")
+
+    typy_slov = {}
+    for slova in vsechna_slova:
+        slovo = slova.strip(".,!?")
+        if slovo.istitle():
+            typ = "titlecase"
+        elif slovo.isupper():
+            typ = "uppercase"
+        elif slovo.islower():
+            typ = "lowercase"
+        elif slovo.isnumeric():
+            typ = "numeric"
+        else:
+            typ = "other"
+        
+        typy_slov[typ] = typy_slov.get(typ, 0) + 1
+
+    for typ, pocet in sorted(typy_slov.items()):
+        print(f"There are {pocet} {typ} words.")
+    print(cara)
+
+    delky = {}
+    for slova in vsechna_slova:
+        d = len(slova)
+        delky[d] = delky.get(d, 0) + 1
+
+    print("LEN|  OCCURRENCES  |NR.")
+    print(cara)
+    for delka, pocet in sorted(delky.items()):
+        print(f"{delka:>3}|{"*" * pocet:<14} | {pocet}")
+
+elif jmeno in uzivatele and uzivatele[jmeno] != heslo:
+    print("Nesprávné heslo.")
+    quit()
+else:
+    print("Unregistered user, terminating the program.")
+    quit()
