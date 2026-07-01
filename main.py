@@ -58,35 +58,35 @@ if jmeno in uzivatele and uzivatele[jmeno] == heslo:
         vsechna_slova = vybrany_text.split()
         print(f"There are {len(vsechna_slova)} words in the selected text.")
 
-    typy_slov = {}
-    for slova in vsechna_slova:
-        slovo = slova.strip(".,!?")
-        if slovo.istitle():
-            typ = "titlecase"
-        elif slovo.isupper():
-            typ = "uppercase"
-        elif slovo.islower():
-            typ = "lowercase"
-        elif slovo.isnumeric():
-            typ = "numeric"
-        else:
-            typ = "other"
-        
-        typy_slov[typ] = typy_slov.get(typ, 0) + 1
+        typy_slov = {}
+        for slova in vsechna_slova:
+            slovo = slova.strip(".,!?")
+            if slovo.istitle():
+                typ = "titlecase"
+            elif slovo.isupper():
+                typ = "uppercase"
+            elif slovo.islower():
+                typ = "lowercase"
+            elif slovo.isnumeric():
+                typ = "numeric"
+            else:
+                typ = "other"
+            
+            typy_slov[typ] = typy_slov.get(typ, 0) + 1
 
-    for typ, pocet in sorted(typy_slov.items()):
-        print(f"There are {pocet} {typ} words.")
-    print(cara)
+        for typ, pocet in sorted(typy_slov.items()):
+            print(f"There are {pocet} {typ} words.")
+        print(cara)
 
-    delky = {}
-    for slova in vsechna_slova:
-        d = len(slova)
-        delky[d] = delky.get(d, 0) + 1
+        delky = {}
+        for slova in vsechna_slova:
+            d = len(slova)
+            delky[d] = delky.get(d, 0) + 1
 
-    print("LEN|  OCCURRENCES  |NR.")
-    print(cara)
-    for delka, pocet in sorted(delky.items()):
-        print(f"{delka:>3}|{"*" * pocet:<14} | {pocet}")
+        print("LEN|   OCCURRENCES   |NR.")
+        print(cara)
+        for delka, pocet in sorted(delky.items()):
+            print(f"{delka:>3}|{"*" * pocet:<16} | {pocet}")
 
 elif jmeno in uzivatele and uzivatele[jmeno] != heslo:
     print("Nesprávné heslo.")
