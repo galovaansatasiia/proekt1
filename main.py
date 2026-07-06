@@ -59,6 +59,7 @@ if jmeno in uzivatele and uzivatele[jmeno] == heslo:
         print(f"There are {len(vsechna_slova)} words in the selected text.")
 
         typy_slov = {}
+        suma_cisel = 0
         for slova in vsechna_slova:
             slovo = slova.strip(".,!?")
             if slovo.istitle():
@@ -69,13 +70,18 @@ if jmeno in uzivatele and uzivatele[jmeno] == heslo:
                 typ = "lowercase"
             elif slovo.isnumeric():
                 typ = "numeric"
+                suma_cisel += int(slovo)
             else:
                 typ = "other"
-            
+
             typy_slov[typ] = typy_slov.get(typ, 0) + 1
 
-        for typ, pocet in sorted(typy_slov.items()):
-            print(f"There are {pocet} {typ} words.")
+        for typ, pocet in typy_slov.items():
+            if typ in ["titlecase", "uppercase", "lowercase"]:
+              print(f"There are {pocet} {typ} words.")
+            elif typ == "numeric":
+              print(f"There are {pocet} {typ} strings.")
+              print(f"The sum of all the numbers  {suma_cisel}.")
         print(cara)
 
         delky = {}
