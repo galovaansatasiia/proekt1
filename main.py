@@ -33,7 +33,14 @@ texts = [
     in modern oceans. Other fish such as paddlefish,
     garpike and stingray are also present.'''
 ]
+
 pocet_textu = len(texts)
+titlecase = 0
+uppercase = 0
+lowercase = 0 
+numeric = 0
+suma_cisel = 0
+delky = {}
 
 jmeno = input(str("username: "))
 heslo = input(str("password: "))
@@ -58,45 +65,36 @@ if jmeno in uzivatele and uzivatele[jmeno] == heslo:
         vsechna_slova = vybrany_text.split()
         print(f"There are {len(vsechna_slova)} words in the selected text.")
 
-        typy_slov = {}
-        suma_cisel = 0
         for slova in vsechna_slova:
-            slovo = slova.strip(".,!?")
+            slovo = slova.strip(".,!?-+*:;|\"'()")
             if slovo.istitle():
-                typ = "titlecase"
+                titlecase +=1
             elif slovo.isupper():
-                typ = "uppercase"
+                uppercase +=1
             elif slovo.islower():
-                typ = "lowercase"
+                lowercase +=1
             elif slovo.isnumeric():
-                typ = "numeric"
+                numeric +=1
                 suma_cisel += int(slovo)
             else:
                 typ = "other"
 
-            typy_slov[typ] = typy_slov.get(typ, 0) + 1
-
-        for typ, pocet in typy_slov.items():
-            if typ in ["titlecase", "uppercase", "lowercase"]:
-              print(f"There are {pocet} {typ} words.")
-            elif typ == "numeric":
-              print(f"There are {pocet} {typ} strings.")
-              print(f"The sum of all the numbers  {suma_cisel}.")
-        print(cara)
-
-        delky = {}
-        for slova in vsechna_slova:
-            d = len(slova)
+            d = len(slovo)
             delky[d] = delky.get(d, 0) + 1
 
-        print("LEN|   OCCURRENCES   |NR.")
+        print(f"There are {titlecase} titlecase words.")
+        print(f"There are {uppercase} uppercase words.")
+        print(f"There are {lowercase} lowercase words.")
+        print(f"There are {numeric} numeric strings.")
+        print(f"The sum of all the numbers {suma_cisel}.")
+        print(cara) 
+
+        print("LEN|       OCCURRENCES       |NR.")
         print(cara)
         for delka, pocet in sorted(delky.items()):
-            print(f"{delka:>3}|{"*" * pocet:<16} | {pocet}")
+            print(f"{delka:>3}|{"*" * pocet:<24} | {pocet}")
 
 elif jmeno in uzivatele and uzivatele[jmeno] != heslo:
-    print("Nesprávné heslo.")
-    quit()
+    print("Incorrect password, terminating the program.")
 else:
     print("Unregistered user, terminating the program.")
-    quit()
